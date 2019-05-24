@@ -54,6 +54,20 @@ class restApi {
             }
             res.send(r);
         });
+        this.app.post('/v1.0/user/devices/query', function(req, res){
+            var r = {
+                request_id:"1",
+                payload:{
+                    devices:[]
+                }
+            };
+            for(var i in req.body.devices){
+                r.payload.devices.push(global.devices[req.body.devices[i].id].getInfo());
+                console.log(global.devices[req.body.devices[i].id].getInfo());
+            }
+            console.log(JSON.stringify(r));
+            res.send(r);
+        });
         this.app.post('/v1.0/user/devices/action', function(req, res){
             console.log(req.body.payload.devices);
             var r = {
